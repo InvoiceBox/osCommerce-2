@@ -16,12 +16,17 @@ ini_set('error_reporting', E_ALL);
 			$this->code = 'invoicebox';
 			$this->title = MODULE_PAYMENT_INVOICEBOX_TEXT_TITLE;
 			$this->description = MODULE_PAYMENT_INVOICEBOX_TEXT_DESCRIPTION;
-			$this->sort_order = MODULE_PAYMENT_INVOICEBOX_SORT_ORDER;
+			$this->sort_order = 0;
+			if(defined("MODULE_PAYMENT_INVOICEBOX_SORT_ORDER")) {
+				$this->sort_order = MODULE_PAYMENT_INVOICEBOX_SORT_ORDER;
+			}
 			$this->enabled =  true;
 			$this->form_action_url = 'https://go.invoicebox.ru/module_inbox_auto.u';
-
-			if ((int)MODULE_PAYMENT_INVOICEBOX_PREPARE_ORDER_STATUS_ID > 0) {
-				$this->order_status = MODULE_PAYMENT_INVOICEBOX_PREPARE_ORDER_STATUS_ID;
+			if(defined("MODULE_PAYMENT_INVOICEBOX_PREPARE_ORDER_STATUS_ID")) {
+			
+				if ((int)MODULE_PAYMENT_INVOICEBOX_PREPARE_ORDER_STATUS_ID > 0) {
+					$this->order_status = MODULE_PAYMENT_INVOICEBOX_PREPARE_ORDER_STATUS_ID;
+				}
 			}
 
 			if (is_object($order)) $this->update_status();
